@@ -11,13 +11,13 @@ class NetworkResponse<Model> {
     return NetworkResponse<Model>(errMessage: message, statusCode: statusCode);
   }
 
-  TResult either<TResult extends Object?>({
-    required Function(Model? data)? success,
-    required Function(String? errMessage) failure,
-  }) {
-    if (success != null) {
-      return success(data);
-    }
-    return failure(errMessage);
-  }
+  // TResult either<TResult extends Object?>({
+  //   required Function(Model? data)? success,
+  //   required Function(String? errMessage) failure,
+  // }) {
+  //   if (success != null) {
+  //     return success(data);
+  //   }
+  //   return failure(errMessage);
+  // }
 }
