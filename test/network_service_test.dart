@@ -28,7 +28,7 @@ void main() {
     });
 
     test(
-        'Test should perform a get request and return a success response and status code',
+        'Test should perform a GET request and return a successful response and status code',
         () async {
       // Arrange
       NetworkRequest request = const NetworkRequest(
@@ -45,11 +45,13 @@ void main() {
       );
 
       // Assert
+      expect(request.type, NetworkRequestType.GET);
       expect(response!.statusCode?.isInRange(200, 299), true);
       expect(response.data?.greeting, "Hello John");
     });
 
-    test('Test should a get request and return 502 as the response status code',
+    test(
+        'Test should perform a GET request and return a Bad Gateway response with its status code.',
         () async {
       // Arrange
       NetworkRequest request = const NetworkRequest(
@@ -66,6 +68,7 @@ void main() {
       );
 
       // Assert
+      expect(request.type, NetworkRequestType.GET);
       expect(response!.statusCode, 502);
       expect(response.errMessage, "Bad Gateway response");
     });
