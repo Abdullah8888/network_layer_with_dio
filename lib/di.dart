@@ -12,8 +12,7 @@ class DiContainer {
     getIt.registerFactory(
         () => DioConfig(baseUrl: 'https://dummyjson.com/', dio: Dio()));
 
-    getIt.registerFactory(
-        () => NetworkService(dio: getIt<DioConfig>().makeDio()));
+    getIt.registerFactory(() => NetworkService(getIt<DioConfig>().makeDio()));
 
     getIt.registerFactory<PhoneRepository>(
         () => PhoneRepositoryImpl(networtkService: getIt()));

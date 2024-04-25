@@ -4,20 +4,15 @@ import 'network_request.dart';
 import 'network_response.dart';
 
 class NetworkService {
-  final Dio dio;
-  NetworkService({required this.dio});
+  final Dio _dio;
+  NetworkService(this._dio);
 
   Future<NetworkResponse<Model>>? execute<Model>(
-      NetworkRequest request, Model Function(dynamic) parser,
-      {ProgressCallback? onSendProgress,
-      ProgressCallback? onReceiveProgress,
-      Iterable<Interceptor>? interceptors}) async {
+    NetworkRequest request,
+    Model Function(dynamic) parser,
+  ) async {
     try {
-      if (interceptors != null) {
-        dio.interceptors.addAll(interceptors);
-      }
-
-      final response = await dio.request(
+      final response = await _dio.request(
         request.path,
         data: request.requestBody,
         queryParameters: request.queryParams,
@@ -25,8 +20,6 @@ class NetworkService {
           method: request.type.name,
           headers: {},
         ),
-        onSendProgress: onSendProgress,
-        onReceiveProgress: onReceiveProgress,
       );
 
       if (response.statusCode?.isInRange(200, 299) == true) {
